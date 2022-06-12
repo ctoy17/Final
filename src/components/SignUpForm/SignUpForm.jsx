@@ -5,6 +5,7 @@ export default class SignUpForm extends Component {
 
     state = {
         name: '',
+        role: {value: 'Player'},
         email: '',
         password: '',
         confirm: '',
@@ -41,6 +42,11 @@ export default class SignUpForm extends Component {
                     <form autoComplete="off" onSubmit={this.handleSubmit}>
                         <label>Name</label>
                         <input type="text" name="name" value={this.state.name} onChange={this.handleChange} required/>
+                        <label>Role</label>
+                        <select name="role" value={this.state.role} onChange={this.handleChange}>
+                            <option value="Player">Player</option>
+                            <option value="Coach">Coach</option>
+                        </select>
                         <label>Email</label>
                         <input type="email" name="email" value={this.state.email} onChange={this.handleChange}
                                required/>
