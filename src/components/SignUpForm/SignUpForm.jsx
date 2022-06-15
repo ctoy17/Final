@@ -5,7 +5,7 @@ export default class SignUpForm extends Component {
 
     state = {
         name: '',
-        role: {value: 'Player'},
+        role: {value: ''},
         email: '',
         password: '',
         confirm: '',
@@ -43,7 +43,8 @@ export default class SignUpForm extends Component {
                         <label>Name</label>
                         <input type="text" name="name" value={this.state.name} onChange={this.handleChange} required/>
                         <label>Role</label>
-                        <select name="role" value={this.state.role} onChange={this.handleChange}>
+                        <select type="select" name="role" value={this.state.role} onChange={this.handleChange} required>
+                            <option value="">Choose One</option>
                             <option value="Player">Player</option>
                             <option value="Coach">Coach</option>
                         </select>
