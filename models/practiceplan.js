@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const practiceSchema = new Schema({
-    user:{type: Schema.Types.ObjectId, ref: 'User'},
+    team:{type: Schema.Types.ObjectId, ref: 'Team'},
     date:{type: String, required: true},
     equipment:{type: String, trim: true},
     startTime:{type: String, required: true},
@@ -14,9 +14,9 @@ const practiceSchema = new Schema({
     timestamps: true,
     toJSON: {
         transform: function(doc, ret) {
-          return ret;
+            return ret;
         }
-      }
-    });
+    }
+});
 
 module.exports = mongoose.model('Practice', practiceSchema);

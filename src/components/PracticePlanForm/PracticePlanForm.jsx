@@ -20,7 +20,7 @@ export default function PracticePlanForm(){
     }
     const handleSubmit = async (evt) => {
         evt.preventDefault();
-        alert(JSON.stringify(this.state));
+        alert(JSON.stringify(practice.state));
         try{
             const planData = {...this.state};
             const practice = await practicePlan(planData);
@@ -33,7 +33,7 @@ export default function PracticePlanForm(){
 
     return(
         <form onSubmit={handleSubmit}>
-            <input type="text" value={this.state.value} onChange={this.handleChange} />
+            <input type="text" value={practice.state.value} onChange={handleChange} />
             <button type="submit">Submit</button>
         </form>
     )
