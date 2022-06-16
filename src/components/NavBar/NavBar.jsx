@@ -8,11 +8,11 @@ export default function NavBar(props) {
     }
 
     return (<nav>
-        <Link to="/teams">Teams Schedule</Link>
+        <Link to="/teams">Team Practice Schedule</Link>
         &nbsp; | &nbsp;
         {props.user.role === 'Coach' ? 
-        <Link to="/teams/new">New Team</Link> :
-        <Link to="/teams/view">View Team</Link>}
+        <Link to="/teams/admin">Team Home</Link> :
+        <></>}
         &nbsp; | &nbsp;
         <span>Welcome {props.user.role === 'Coach' ? <>Coach</> : <></>} {props.user.name}</span>
         &nbsp; | &nbsp;

@@ -1,6 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import * as practicePlanAPI from '../../utilities/practiceplan-api';
-// import './NewOrderPage.css';
 import { Link, useHistory } from 'react-router-dom';
 
 

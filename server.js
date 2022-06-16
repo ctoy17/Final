@@ -24,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'build')));
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/practiceplan', require('./routes/api/practiceplan'));
 app.use('/api/team', require('./routes/api/team'));
+app.use('/api/comment', require('./routes/api/comment'));
 
 
 // The following "catch all" route (note the *) is necessary

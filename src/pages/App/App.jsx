@@ -1,12 +1,12 @@
 import './App.css';
 import {useState} from "react";
-import TeamAdminPage from "../TeamAdminPage/TeamAdminPage";
+import CoachDashboardPage from "../CoachDashboardPage/CoachDashboardPage";
 import AuthPage from "../AuthPage/AuthPage";
 import {Route, Switch, Redirect} from "react-router-dom";
 import { getUser } from '../../utilities/users-service';
 import TeamSchedulePage from "../TeamSchedule/TeamSchedulePage";
 import NavBar from "../../components/NavBar/NavBar";
-import ViewTeamsPage from "../ViewTeams/ViewTeamsPage"
+// import ViewTeamsPage from "../ViewTeams/ViewTeamsPage"
 import PlayerProfilePage from '../PlayerProfilePage/PlayerProfilePage';
 
 export default function App() {
@@ -16,11 +16,11 @@ export default function App() {
                 <NavBar user={user} setUser={setUser}/>
                 <Switch>
                     <Route path="/teams/admin">
-                        <TeamAdminPage user={user} setUser={setUser}/>
+                        <CoachDashboardPage user={user} setUser={setUser}/>
                     </Route>
-                    <Route path="/teams/view">
+                    {/* <Route path="/teams/view">
                         <ViewTeamsPage user={user} setUser={setUser}/>
-                    </Route>
+                    </Route> */}
                     <Route path="/teams">
                         <TeamSchedulePage user={user} setUser={setUser}/>
                     </Route>

@@ -1,40 +1,61 @@
 import { useState } from 'react'
-import * as practicePlan from '../../utilities/practiceplan-api'
+import { usePracticePlanContext } from '../../hooks/usePracticePlanContext'
+import * as practicePlanAPI from '../../utilities/practiceplan-api'
 
-export default function PracticePlanForm(){
-    const [practice, setPractice] = useState({
-        user: '',
-        date: '',
-        equipment: '',
-        startTime: '',
-        endTime: '',
-        drill: '',
-        announcement: ''
-    });
+const PracticePlanForm = () => {
+    const {dispatch} = usePracticePlanContext()
+    
+    const [date, setDate] = useState('')
+    const [equipment, setEquipment] = useState('')
+    const [startTime, setStartTime] = useState('')
+    const [endTime, setEndTime] = useState('')
+    const [drill, setDrill] = useState('')
+    const [announcement, setAnnouncement] = useState('')
+    
+    const [emptyFields, setEmptyFields] = useState([])
+    const [error, setError] = useState('')
+    
 
-    const handleChange = (evt) => {
-        setPractice(oldPractice =>({
-            ...oldPractice,
-            [evt.target.name]: evt.target.value
-        }));
-    }
-    const handleSubmit = async (evt) => {
+    
+    async function handleSubmit(evt) {
         evt.preventDefault();
-        alert(JSON.stringify(practice.state));
-        try{
-            const planData = {...this.state};
-            const practice = await practicePlan(planData);
-            this.props.setPractice(practice);
-            console.log(practice);
-        } catch {
-            this.setState({ error: 'Sign Up Failed - Try Again' });
+        const planData = {date, equipment, startTime, endTime, drill, announcement}
+        try{ 
+            const practicePlan = await practicePlanAPI.addPracticePlan(planData);
+            setEmptyFields([])
+            setError(null)
+            setDate('')
+            setEquipment('')
+            setStartTime('')
+            setEndTime('')
+            setDrill('')
+            setAnnouncement('') 
+            dispatch({type: 'CREATE_PRACTICEPLANS', payload: practicePlan})
+        }catch{
+            setError('please fill out fields')
         }
     }
+        
 
     return(
-        <form onSubmit={handleSubmit}>
-            <input type="text" value={practice.state.value} onChange={handleChange} />
-            <button type="submit">Submit</button>
+        <form className="createPlan" onSubmit={handleSubmit}>
+            <h3>Input Practice Plan</h3>
+            <br/>
+            <label>Date</label>
+            <input type="text" onChange={(e) => setDate(e.target.value)} value={date} className={emptyFields.includes('date') ? 'error' : ''} />
+            <label>Start Time</label>
+            <input type="text" onChange={(e) => setStartTime(e.target.value)} value={startTime} className={emptyFields.includes('startTime') ? 'error' : ''} />
+            <label>End Time</label>
+            <input type="text" onChange={(e) => setEndTime(e.target.value)} value={endTime} className={emptyFields.includes('endTime') ? 'error' : ''} />
+            <label>Equipment Needed</label>
+            <input type="text" onChange={(e) => setEquipment(e.target.value)} value={equipment} className={emptyFields.includes('equipment') ? 'error' : ''} />
+            <label>Drill</label>
+            <input type="text" onChange={(e) => setDrill(e.target.value)} value={drill} className={emptyFields.includes('drill') ? 'error' : ''} />
+            <label>Announcements</label>
+            <input type="text" onChange={(e) => setAnnouncement(e.target.value)} value={announcement} className={emptyFields.includes('announcement') ? 'error' : ''} />
+            <button type="submit"  >Submit</button>
+            {error && <div className='error'>{error}</div>}
         </form>
     )
 }
+export default PracticePlanForm
