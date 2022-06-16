@@ -3,9 +3,9 @@ const router = express.Router();
 const practicePlanCtrl = require('../../controllers/api/practiceplan');
 
 
-router.get('/practice', practicePlanCtrl.practiceScheduleList);
-router.post('/practice', practicePlanCtrl.createPracticePlan);
-router.delete('/practice/:id', practicePlanCtrl.removePracticePlan);
-router.put('/practice/:id', practicePlanCtrl.updatePractice)
+router.get('/', practicePlanCtrl.practiceList);
+router.post('/', practicePlanCtrl.createPracticePlan);
+router.delete('/:id', practicePlanCtrl.removePracticePlan);
+router.post('/:id', practicePlanCtrl.updatePractice)
 
 module.exports = router;
