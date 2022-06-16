@@ -3,8 +3,8 @@ const Team = require('../../models/team');
 module.exports = {
     teamList,
     createTeam,
-    // removeTeam,
-    // updateTeam
+    removeTeam,
+    updateTeam
 };
 
 async function teamList(req, res){
@@ -20,4 +20,20 @@ async function createTeam(req, res){
     }catch(error){
         res.status(400).json(error)
     }
+};
+async function removeTeam(req, res){
+    const id = req.params.id;
+    await Team.findByIdAndDelete(id)
+    res.status(204).end()
 }
+
+async function updateTeam(req, res){
+    const id = req.params.id;
+    const team = req.body;
+    const teamData = {
+        name: team.name,
+        sport: team.sport
+    }
+    const updateTeam = await Team.findByIdAndUpdate({_id: id}, teamData)
+    res.json(updateTeam)
+};

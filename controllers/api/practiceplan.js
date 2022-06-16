@@ -26,7 +26,7 @@ async function createPracticePlan(req, res) {
 
 async function removePracticePlan(req, res) {
     const id = req.params.id
-    await Practice.findByIdAndRemove(id)
+    await Practice.findByIdAndDelete(id)
     res.status(204).end()
   }
   
