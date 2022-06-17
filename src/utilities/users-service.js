@@ -17,8 +17,9 @@ export async function login(credentials) {
         // usersAPI.login will resolve to the token sent back
         // from the server
         const token = await usersAPI.login(credentials);
-        localStorage.setItem('token', token);
+        localStorage.setItem('token', token);console.log(token)
         return getUser();
+        
     } catch {
         throw new Error('Invalid Credentials - Try Again');
     }
@@ -41,7 +42,6 @@ export function getToken() {
 
 export function getUser() {
     const token = getToken();
-    
     // If there's a token, return the user in the payload, otherwise return null
     return token ? JSON.parse(atob(token.split('.')[1])).user : null;
 }

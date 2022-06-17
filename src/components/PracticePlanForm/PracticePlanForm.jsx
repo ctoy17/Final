@@ -2,26 +2,23 @@ import { useState } from 'react'
 import { usePracticePlanContext } from '../../hooks/usePracticePlanContext'
 import * as practicePlanAPI from '../../utilities/practiceplan-api'
 
-const PracticePlanForm = () => {
+const PracticePlanForm = ({user}) => {
     const {dispatch} = usePracticePlanContext()
-    
     const [date, setDate] = useState('')
     const [equipment, setEquipment] = useState('')
     const [startTime, setStartTime] = useState('')
     const [endTime, setEndTime] = useState('')
     const [drill, setDrill] = useState('')
     const [announcement, setAnnouncement] = useState('')
-    
     const [emptyFields, setEmptyFields] = useState([])
     const [error, setError] = useState('')
-    
-
+    const team = user.team
+    const username = user.name
     
     async function handleSubmit(evt) {
         evt.preventDefault();
-        const planData = {date, equipment, startTime, endTime, drill, announcement}
         try{ 
-            const practicePlan = await practicePlanAPI.addPracticePlan(planData);
+            const practicePlans = await practicePlanAPI.addPracticePlan({username, team, date, equipment, startTime, endTime, drill, announcement});
             setEmptyFields([])
             setError(null)
             setDate('')
@@ -30,7 +27,8 @@ const PracticePlanForm = () => {
             setEndTime('')
             setDrill('')
             setAnnouncement('') 
-            dispatch({type: 'CREATE_PRACTICEPLANS', payload: practicePlan})
+            dispatch({type: 'CREATE_PRACTICEPLANS', payload: practicePlans})
+            console.log(practicePlans)
         }catch{
             setError('please fill out fields')
         }
@@ -38,7 +36,8 @@ const PracticePlanForm = () => {
         
 
     return(
-        <form className="createPlan" onSubmit={handleSubmit}>
+        
+        <form className="createPlan" onSubmit={handleSubmit} >
             <h3>Input Practice Plan</h3>
             <br/>
             <label>Date</label>
@@ -53,7 +52,7 @@ const PracticePlanForm = () => {
             <input type="text" onChange={(e) => setDrill(e.target.value)} value={drill} className={emptyFields.includes('drill') ? 'error' : ''} />
             <label>Announcements</label>
             <input type="text" onChange={(e) => setAnnouncement(e.target.value)} value={announcement} className={emptyFields.includes('announcement') ? 'error' : ''} />
-            <button type="submit"  >Submit</button>
+            <button type="submit" >Submit</button>
             {error && <div className='error'>{error}</div>}
         </form>
     )

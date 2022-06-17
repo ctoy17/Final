@@ -18,6 +18,7 @@ export default function LogIn({setUser}) {
         try {
             const user = await usersService.login(credentials);
             setUser(user);
+            console.log(user)
         } catch {
             setError('Log In Failed - Try Again');
         }

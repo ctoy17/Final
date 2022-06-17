@@ -2,15 +2,18 @@ import {Component} from "react";
 import { signUp } from '../../utilities/users-service';
 
 export default class SignUpForm extends Component {
-
+    
     state = {
         name: '',
         role: {value: ''},
+        team: '',
         email: '',
         password: '',
         confirm: '',
         error: ''
     };
+
+
 
     handleChange = (evt) => {
         this.setState({
@@ -41,22 +44,21 @@ export default class SignUpForm extends Component {
                 <div className="form-container">
                     <form autoComplete="off" onSubmit={this.handleSubmit}>
                         <label>Name</label>
-                        <input type="text" name="name" value={this.state.name} onChange={this.handleChange} required/>
+                            <input type="text" name="name" value={this.state.name} onChange={this.handleChange} required/>
                         <label>Role</label>
-                        <select type="select" name="role" value={this.state.role} onChange={this.handleChange} required>
+                        <select type="select" name="role" value={this.state.role} onChange={this.handleChange} required >
                             <option value="">Choose One</option>
                             <option value="Player">Player</option>
                             <option value="Coach">Coach</option>
                         </select>
+                        <label>Team </label> 
+                            <input type="text" name="team" value={this.state.team} onChange={this.handleChange} required/>
                         <label>Email</label>
-                        <input type="email" name="email" value={this.state.email} onChange={this.handleChange}
-                               required/>
+                            <input type="email" name="email" value={this.state.email} onChange={this.handleChange} required/>
                         <label>Password</label>
-                        <input type="password" name="password" value={this.state.password} onChange={this.handleChange}
-                               required/>
+                            <input type="password" name="password" value={this.state.password} onChange={this.handleChange} required/>
                         <label>Confirm</label>
-                        <input type="password" name="confirm" value={this.state.confirm} onChange={this.handleChange}
-                               required/>
+                            <input type="password" name="confirm" value={this.state.confirm} onChange={this.handleChange} required/>
                         <button type="submit" disabled={disable}>SIGN UP</button>
                     </form>
                 </div>

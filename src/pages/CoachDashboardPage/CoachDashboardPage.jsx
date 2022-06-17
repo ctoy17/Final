@@ -5,8 +5,9 @@ import { useEffect } from 'react';
 import { usePracticePlanContext } from '../../hooks/usePracticePlanContext';
 
 
-export default function CoachDashboardPage() {
+export default function CoachDashboardPage({user}) {
     const {practicePlans, dispatch} = usePracticePlanContext()
+    
 
     useEffect(function(){
         async function getPractice(){
@@ -16,18 +17,17 @@ export default function CoachDashboardPage() {
     getPractice()
 }, [dispatch]); 
 
-  // Event HANDLERS
 
 
 
     return (
         <main className="coachDashboard">
             <div className='practicePlan'>
-                {practicePlans && practicePlans.map((practicePlan)=>(
-                    <PracticeDetails key={practicePlan._id} practicePlan={practicePlan}/>
-                    ))}
+            {practicePlans && practicePlans.map((practicePlan)=>(
+            <PracticeDetails key={practicePlan._id} practicePlan={practicePlan} />))}
+                
             </div>
-            <PracticePlanForm/>
+            <PracticePlanForm user={user}/>
         </main>
     );
 }

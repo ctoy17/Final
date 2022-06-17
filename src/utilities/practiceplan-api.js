@@ -3,7 +3,7 @@ const BASE_URL = '/api/practiceplan';
 
 //show all practices
 export function practiceList() {
-    return sendRequest(BASE_URL);
+    return sendRequest(BASE_URL, 'GET');
 }
 export function addPracticePlan(planData) {
 //add practice plan

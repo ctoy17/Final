@@ -8,7 +8,7 @@ module.exports = {
 };
 
 async function practiceList(req, res) {
-    const practicePlans = await Practice.find({});
+    const practicePlans = await Practice.find();
     res.json(practicePlans)
 }
 

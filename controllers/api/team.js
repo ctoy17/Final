@@ -1,4 +1,5 @@
 const Team = require('../../models/team');
+const Practice = require('../../models/practiceplan')
 
 module.exports = {
     teamList,
@@ -8,7 +9,7 @@ module.exports = {
 };
 
 async function teamList(req, res){
-    const teams = await Team.find({});
+    const teams = await Team.find(req.practice);
     res.json(teams)
 };
 
