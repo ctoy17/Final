@@ -1,33 +1,36 @@
-import * as practicePlanAPI from '../../utilities/practiceplan-api';
-import PracticePlanForm from '../../components/PracticePlanForm/PracticePlanForm';
-import PracticeDetails from '../../components/PracticeDetails/PracticeDetails'
-import { useEffect } from 'react';
-import { usePracticePlanContext } from '../../hooks/usePracticePlanContext';
+import { useState, useEffect } from "react";
+import {Link} from "react-router-dom";
+import PracticeCard from "../../components/PracticeCard/PracticeCard";
+import * as practicePlanAPI from '../../utilities/practiceplan-api'
 
 
-export default function CoachDashboardPage({user}) {
-    const {practicePlans, dispatch} = usePracticePlanContext()
-    
-
+export default function CoachDashboardPage() {
+    const [coachPlan, setCoachPlan] = useState([]);
     useEffect(function(){
         async function getPractice(){
-        const response = await practicePlanAPI.practiceList();
-        dispatch({type: 'SET_PRACTICEPLANS', payload: response})
-        }
-    getPractice()
-}, [dispatch]); 
+            const practices = await practicePlanAPI.getCoachPractices();
+            setCoachPlan(practices);
+            console.log(practices)
+        }getPractice();
+    }, []);
 
+    const handleDelete = async (id) => {
 
-
+        const practices = await practicePlanAPI.removePracticePlan(id);
+        setCoachPlan(practices);
+        console.log(practices)
+    };
 
     return (
         <main className="coachDashboard">
             <div className='practicePlan'>
-            {practicePlans && practicePlans.map((practicePlan)=>(
-            <PracticeDetails key={practicePlan._id} practicePlan={practicePlan} />))}
-                
+                <>
+                {coachPlan.length ? coachPlan.map((coachPlan)=>(
+                    <PracticeCard coachPlan={coachPlan} key={coachPlan._id} handleDelete={handleDelete}/>
+                )) : <h3> No Practices Have Been Added! </h3>}
+                </>
             </div>
-            <PracticePlanForm user={user}/>
+            <Link to="/create"> Add a New Plan </Link>
         </main>
     );
 }

@@ -1,50 +1,51 @@
 const Practice = require('../../models/practiceplan')
 
 module.exports = {
-    practiceList,
-    createPracticePlan,
+    getAllPractices,
+    getCoachPractices,
+    createPractice,
     updatePractice,
-    removePracticePlan
+    removePractice
 };
 
-async function practiceList(req, res) {
-    const practicePlans = await Practice.find();
-    res.json(practicePlans)
-}
+async function getAllPractices(req, res){
+    Practice.find().populate('coach').populate('team').populate('date').populate('drill').populate('announcement').exec(function(error, practices){
+        res.json(practices);
+    })}
 
-async function createPracticePlan(req, res) {
-    req.body.user = req.user;
-    try{
-        const plan = await Practice.create(req.body);
-        res.status(200).json(plan)
-    }catch(error){
-        res.status(400).json(error)
-    }
+async function getCoachPractices(req, res){
+    const practices = await Practice.find({coach: req.user._id});
+    res.json(practices);
+}
+async function createPractice(req, res) {
+    req.body.practice.coach = req.user._id;
+    const practice= new Practice(req.body.practice);
+    await practice.save();
+    res.json(practice);
     }
     
 
 
-async function removePracticePlan(req, res) {
-    const id = req.params.id
-    await Practice.findByIdAndDelete(id)
-    res.status(204).end()
-  }
-  
+async function removePractice(req, res) {
+    Practice.deleteOne(
+        {_id: req.params.id}, 
+        async function(error){
+            const practice = await Practice.find({coach: req.user._id})
+            res.json(practice)
+        })
+    }
+
 async function updatePractice(req, res) {
     const id = req.params.id
     const body = req.body
-
     const practicePlans = {
         date: body.date,
         equipment: body.equipment,
         startTime: body.startTime,
         endTime: body.endTime,
         drill: body.drill,
-        announcements: body.announcements,
+        announcement: body.announcement,
     }
-  
-    const updatePractice= await Practice.findByIdAndUpdate({_id: id}, practicePlans
-    )
-  
+    const updatePractice= await Practice.findByIdAndUpdate({_id: id}, practicePlans)
     res.json(updatePractice)
-  }
+    }

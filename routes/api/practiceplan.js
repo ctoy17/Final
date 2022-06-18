@@ -1,11 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const practicePlanCtrl = require('../../controllers/api/practiceplan');
+const ensureLoggedIn = require('../../config/ensureLoggedIn');
 
 
-router.get('/', practicePlanCtrl.practiceList);
-router.post('/', practicePlanCtrl.createPracticePlan);
-router.delete('/:id', practicePlanCtrl.removePracticePlan);
-router.post('/:id', practicePlanCtrl.updatePractice)
+router.post('/create', ensureLoggedIn, practicePlanCtrl.createPractice);
+router.get('/practices', practicePlanCtrl.getAllPractices);
+router.get('/coach', practicePlanCtrl.getCoachPractices);
+router.delete('/coach/:id', ensureLoggedIn, practicePlanCtrl.removePractice);
+router.post('/coach/:id', ensureLoggedIn, practicePlanCtrl.updatePractice);
 
 module.exports = router;
+
+

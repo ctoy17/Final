@@ -1,5 +1,4 @@
 const Team = require('../../models/team');
-const Practice = require('../../models/practiceplan')
 
 module.exports = {
     teamList,
@@ -9,9 +8,13 @@ module.exports = {
 };
 
 async function teamList(req, res){
-    const teams = await Team.find(req.practice);
-    res.json(teams)
-};
+    try{
+        const teams = await Team.find({email: req.body.email}).populate("teams");
+        res.json(teams)
+    }catch(err){
+        res.status(400).json(err);
+    }
+}
 
 async function createTeam(req, res){
     const teamData = req.body

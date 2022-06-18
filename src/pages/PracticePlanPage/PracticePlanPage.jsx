@@ -1,45 +1,49 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import * as practicePlanAPI from '../../utilities/practiceplan-api';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 
-export default function PracticePlanPage({ user, setUser }) {
-  const [practicePlans, setPracticePlans] = useState(null);
+export default function PracticePlanPage() {
+  const [practice, setPractice] = useState({
+    date: "",
+    equipment: "",
+    startTime: "",
+    endTime: "",
+    drill: "",
+    announcement: ""
+  });
 
   const history = useHistory();
-
-   useEffect(function() {
-     async function getPractice() {
-       const response = await practicePlanAPI.practiceList();
-       const json = await response.json()
-       if(response.ok){
-           setPracticePlans(json)
-       }
-    }
-     getPractice();
-
-    // async function getPractice(){
-    //   const practice = await practicePlanAPI.getPractice();
-    //   console.log('practice get is ', practice)
-    //   setPractice(practice);
-    // }
-    // getPractice();
-}, []);  // an empty dependency array will run the effect after the first render only
-
-  // Event HANDLERS
+  
+  function handleChange(evt){
+    setPractice({...practice, [evt.target.name]: evt.target.value });
+  }
+  async function handleSubmit(evt) {
+    evt.preventDefault();
+    await practicePlanAPI.createPractice(practice)
+    history.push('/');
+  }
 
 
-
-
-  return (
-    <main className="PracticePlanPage">
-      <aside>
-        <Link to="/practices" className="button btn-sm">PREVIOUS PRACTICES</Link>
-        {practicePlans && practicePlans.map((practicePlans)=>(
-            <p key={practicePlans._id}>{practicePlans}</p>
-        ))}
-      </aside>
-      
-    </main>
+return (
+  <div className='practicePlan'>
+      <form className="createPlan" onSubmit={handleSubmit} >
+          <h3>Input Practice Plan</h3>
+          <br/>
+          <label>Date</label>
+              <input type="text" name="date" value={practice.date} onChange={handleChange} />
+          <label>Start Time</label>
+              <input type="text" name="startTime" value={practice.startTime} onChange={handleChange} />
+          <label>End Time</label>
+              <input type="text" name="endTime" value={practice.endTime} onChange={handleChange} />
+          <label>Equipment Needed</label>
+              <input type="text" name="equipment" value={practice.equipment} onChange={handleChange}/>
+          <label>Drill</label>
+              <input type="text" name="drill" value={practice.drill} onChange={handleChange} />
+          <label>Announcements</label>
+              <input type="text" name="announcement" value={practice.announcement} onChange={handleChange} />
+          <button type="submit">Submit</button>
+      </form>
+  </div>
   );
 }

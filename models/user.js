@@ -4,10 +4,10 @@ const bcrypt = require('bcrypt');
 
 const SALT_ROUNDS = 6;  // 6 is a reasonable value
 
+
+
 const userSchema = new Schema({
         name: {type: String, required: true},
-        role: {type: String, required: true},
-        team: {type: String, required: true},
         email: {
             type: String,
             unique: true,
@@ -20,7 +20,7 @@ const userSchema = new Schema({
             trim: true,
             minLength: 3,
             required: true
-        }
+        },
     },
     {
         timestamps: true,
@@ -32,6 +32,8 @@ const userSchema = new Schema({
         }
     }
 );
+
+
 
 userSchema.pre('save', function (next) {
     // Save the reference to the user doc
@@ -46,4 +48,4 @@ userSchema.pre('save', function (next) {
     });
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Coach', userSchema);
