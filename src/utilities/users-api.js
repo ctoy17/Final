@@ -1,3 +1,4 @@
+import sendRequest from "./send-request";
 const BASE_URL = '/api/users';
 
 export async function signUp(userData) {
@@ -19,6 +20,8 @@ export async function signUp(userData) {
     }
 }
 
+
+
 export async function login(credentials) {
     const res = await fetch(`${BASE_URL}/login`, {
         method: 'POST',
@@ -30,4 +33,7 @@ export async function login(credentials) {
     } else {
         throw new Error('Invalid Credentials');
     }
+}
+export function checkToken() {
+    return sendRequest(`${BASE_URL}/check-token`);
 }

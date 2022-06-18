@@ -5,14 +5,11 @@ export default class SignUpForm extends Component {
     
     state = {
         name: '',
-        role: {value: ''},
-        team: '',
         email: '',
         password: '',
         confirm: '',
         error: ''
     };
-
 
 
     handleChange = (evt) => {
@@ -21,6 +18,7 @@ export default class SignUpForm extends Component {
             error: ''
         });
     }
+
 
     handleSubmit = async (evt) => {
         evt.preventDefault();
@@ -31,6 +29,7 @@ export default class SignUpForm extends Component {
             delete formData.confirm;
             const user = await signUp(formData);
             this.props.setUser(user);
+            
             console.log(user);
         } catch {
             this.setState({ error: 'Sign Up Failed - Try Again' });
@@ -45,14 +44,6 @@ export default class SignUpForm extends Component {
                     <form autoComplete="off" onSubmit={this.handleSubmit}>
                         <label>Name</label>
                             <input type="text" name="name" value={this.state.name} onChange={this.handleChange} required/>
-                        <label>Role</label>
-                        <select type="select" name="role" value={this.state.role} onChange={this.handleChange} required >
-                            <option value="">Choose One</option>
-                            <option value="Player">Player</option>
-                            <option value="Coach">Coach</option>
-                        </select>
-                        <label>Team </label> 
-                            <input type="text" name="team" value={this.state.team} onChange={this.handleChange} required/>
                         <label>Email</label>
                             <input type="email" name="email" value={this.state.email} onChange={this.handleChange} required/>
                         <label>Password</label>
