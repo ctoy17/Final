@@ -15,7 +15,6 @@ export default function CoachDashboardPage() {
     }, []);
 
     const handleDelete = async (id) => {
-
         const practices = await practicePlanAPI.removePracticePlan(id);
         setCoachPlan(practices);
         console.log(practices)
