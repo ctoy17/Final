@@ -10,7 +10,7 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 
 function Copyright(props) {
     return (
@@ -25,7 +25,6 @@ function Copyright(props) {
     );
   }
   
-  const theme = createTheme();
   
   export default class SignUpForm extends Component {
     
@@ -63,7 +62,7 @@ function Copyright(props) {
     render() {
         const disable = this.state.password !== this.state.confirm;
         return (
-            <ThemeProvider theme={theme}>
+            <ThemeProvider theme={this.props.theme}>
                 <Container component="main" maxWidth="xs">
                     <CssBaseline />
                     <Box

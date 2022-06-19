@@ -1,5 +1,6 @@
 import {Link} from "react-router-dom";
 import * as userService from '../../utilities/users-service';
+import { ThemeProvider } from '@mui/material/styles';
 
 export default function NavBar(props) {
     function handleLogOut() {
@@ -7,12 +8,13 @@ export default function NavBar(props) {
         props.setUser(null);
     }
 
-    return (<nav>
-        <Link to="/create">Add Practice Schedule</Link>
-        &nbsp; | &nbsp;
-        &nbsp; | &nbsp;
+    return (
+    <ThemeProvider theme={props.theme}>
         <span>Welcome Coach {props.user.name}</span>
         &nbsp; | &nbsp;
+        <Link to="/create">Add Practice Schedule</Link>
+        &nbsp; | &nbsp;
         <Link to="" onClick={handleLogOut}>Logout</Link>
-    </nav>);
+    </ThemeProvider>
+    );
 }

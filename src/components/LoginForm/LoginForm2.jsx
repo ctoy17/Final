@@ -10,7 +10,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 
 function Copyright(props) {
     return (
@@ -25,9 +25,9 @@ function Copyright(props) {
     );
 }
 
-const theme = createTheme();
 
-export default function LogIn({setUser, showLogin, setShowLogin}) {
+
+export default function LogIn({setUser, showLogin, setShowLogin, theme}) {
     const [credentials, setCredentials] = useState({
         email: '',
         password: ''
@@ -62,7 +62,7 @@ export default function LogIn({setUser, showLogin, setShowLogin}) {
                 sm={4}
                 md={7}
                 sx={{
-                backgroundImage: 'url(https://source.unsplash.com/random)',
+                backgroundImage: 'url(https://i.imgur.com/WpXjy43.png)',
                 backgroundRepeat: 'no-repeat',
                 backgroundColor: (t) =>
                 t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
