@@ -13,6 +13,9 @@ export function getAllPractices() {
 export function getCoachPractices() {
     return sendRequest(`${BASE_URL}/coach`);
 }
+export function viewDetails(id) {
+    return sendRequest(`${BASE_URL}/coach/${id}`);
+}
 
 export function removePracticePlan(id) {
     return sendRequest(`${BASE_URL}/coach/${id}`, 'DELETE');

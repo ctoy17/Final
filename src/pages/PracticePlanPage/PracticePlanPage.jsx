@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import * as practicePlanAPI from '../../utilities/practiceplan-api';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -10,7 +10,11 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { createTheme,ThemeProvider } from '@mui/material/styles';
 import Container from '@mui/material/Container';
-
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Link from '@mui/material/Link';
 
 export default function PracticePlanPage() {
   const [practice, setPractice] = useState({
@@ -48,8 +52,15 @@ return (
 
   <ThemeProvider theme={theme}>
     <CssBaseline />
-    <Link to="/coach">Back To Coach Profile</Link>
+    
       <Container  item xs={12} sm={8} md={5} component={Paper} elevation={6}>
+                  <ListItemButton><Link href='/coach' >
+            <ListItemText primary="Back"/>
+            <ListItemIcon>
+              <ArrowBackIosIcon href="/coach"/>
+            </ListItemIcon></Link>
+              
+          </ListItemButton>
         <Box
           sx={{
             marginTop: 8,
@@ -59,6 +70,7 @@ return (
             alignItems: 'center',
           }}
         >
+
           <Typography component="h1" variant="h5" sx={{mt: 3}}>
                 Enter Practice Details
           </Typography>

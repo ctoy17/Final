@@ -4,6 +4,7 @@ module.exports = {
     getAllPractices,
     getCoachPractices,
     createPractice,
+    viewDetails,
     updatePractice,
     removePractice
 };
@@ -24,7 +25,10 @@ async function createPractice(req, res) {
     res.json(practice);
     }
     
-
+    async function viewDetails(req, res) {
+        const details = await Practice.find({ _id: req.params.id });
+        res.json(details);
+    }
 
 async function removePractice(req, res) {
     Practice.deleteOne(
@@ -46,6 +50,7 @@ async function updatePractice(req, res) {
         drill: body.drill,
         announcement: body.announcement,
     }
-    const updatePractice= await Practice.findByIdAndUpdate({_id: id}, practicePlans)
+    const updatePractice= await Practice.findOneAndUpdate({_id: id}, {practicePlans},
+        { new: true, safe: true, upsert: true })
     res.json(updatePractice)
     }

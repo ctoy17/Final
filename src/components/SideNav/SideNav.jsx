@@ -5,12 +5,11 @@ import ListItemText from '@mui/material/ListItemText';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import Link from '@mui/material/Link';
-import { ThemeProvider, styled } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 
 export default function SideNav({theme}){
     return(
     <ThemeProvider theme={theme}>
-  <React.Fragment>
     <ListItemButton>
       <ListItemIcon>
         <DashboardIcon />
@@ -23,7 +22,6 @@ export default function SideNav({theme}){
       </ListItemIcon>
         <Link color="inherit" href="/create"><ListItemText primary="New Practice"/></Link>  
     </ListItemButton>
-  </React.Fragment>
   </ThemeProvider>
     )
 }
