@@ -207,7 +207,8 @@ function Copyright(props) {
                                     flexDirection: 'column',
                                     height: 240,
                                     alignItems: 'center',
-                                    justifyContent: 'center'
+                                    justifyContent: 'center',
+                                    
                                 }}
                                 >
                                     <Profile theme={theme} user={user}/>

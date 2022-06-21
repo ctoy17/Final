@@ -62,7 +62,7 @@ export default function LogIn({setUser, showLogin, setShowLogin, theme}) {
                 sm={4}
                 md={7}
                 sx={{
-                backgroundImage: 'url(https://i.imgur.com/WpXjy43.png)',
+                backgroundImage: 'url(https://i.imgur.com/GCNppwm.png)',
                 backgroundRepeat: 'no-repeat',
                 backgroundColor: (t) =>
                 t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],

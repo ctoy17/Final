@@ -55,7 +55,7 @@ return (
     
       <Container  item xs={12} sm={8} md={5} component={Paper} elevation={6}>
                   <ListItemButton><Link href='/coach' >
-            <ListItemText primary="Back"/>
+            <ListItemText primary=""/>
             <ListItemIcon>
               <ArrowBackIosIcon href="/coach"/>
             </ListItemIcon></Link>
