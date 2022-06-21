@@ -27,7 +27,7 @@ export default function PracticeCard({ theme, coachPlan, handleDelete, handleUpd
                     component="img"
                     sx={{
                       pt: '56.25%',
-                      backgroundImage: 'url(https://i.imgur.com/WpXjy43.png)',
+                      backgroundImage: 'url(https://i.imgur.com/GCNppwm.png)',
                       backgroundRepeat: 'no-repeat',
                       backgroundColor: (t) =>
                       t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],

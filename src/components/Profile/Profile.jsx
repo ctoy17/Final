@@ -8,7 +8,7 @@ export default function Profile({theme, user}) {
         <Avatar
             alt="Coach"
             src="/static/images/avatar/1.jpg"
-            sx={{ width: 70, height: 70, backgroundColor: 'secondary.main' }}
+            sx={{ width: 70, height: 70, border: 1, borderColor: 'primary.main', boxShadow: 4,  backgroundColor: 'secondary.main' }}
             
         />
         <Typography sx={{ component:"h1", variant:"h2", paddingTop: 3 }}>Coach {user.name} </Typography>
